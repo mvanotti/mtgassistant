@@ -58,6 +58,13 @@ type card struct {
 	cc    string
 }
 
+var ignoredLines = map[string]bool{
+	"Deck":      true,
+	"Sideboard": true,
+	"Commander": true,
+	"":          true,
+}
+
 var mtgaRegexp *regexp.Regexp = regexp.MustCompile(`^([1-9][0-9]*) (.*) \(([A-Z0-9]{3})\) ?(.*)?$`)
 
 func isBasicLand(str string) bool {
@@ -79,6 +86,9 @@ func parseFile(path string) ([]card, error) {
 	lineNum := 0
 	for scanner.Scan() {
 		ln := strings.TrimSpace(scanner.Text())
+		if ignoredLines[ln] {
+			continue
+		}
 		ls := mtgaRegexp.FindStringSubmatch(ln)
 		if len(ls) != 5 { // [matchedline count name expn cc]
 			return nil, fmt.Errorf("[%d] could not parse line %q", lineNum, ln)
@@ -172,13 +182,13 @@ func main() {
 	}
 
 	totalCount := uint32(0)
-	byRarity := make(map[uint64]int)
+	byRarity := make(map[uint64]uint32)
 	for id, count := range dist {
 		card := db.GetCardByID(id)
 		if card == nil {
 			log.Fatalf("invalid card id %d", id)
 		}
-		byRarity[card.Rarity]++
+		byRarity[card.Rarity] += count
 		fmt.Printf("%d %s (%s)\n", count, card.Name, cardRarity[card.Rarity])
 		totalCount += count
 	}
