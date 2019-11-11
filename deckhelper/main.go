@@ -1,7 +1,7 @@
-// program deckhelper takes a list of cards (your card collection) and a deck, both in
-// mtga format, and will tell you how many cards do you have to craft.
-// If you also provide the Magic The Gathering: Arena resource files, it will tell you
-// the rarity of the cards that you need to craft as well.
+// program deckhelper takes a list of cards (a card deck in mtga format,
+// and will tell you how many cards do you have to craft.
+// It will try to get your collection for the MTG Arena logs, and create a database
+// of cards using the MTG Arena resource files.
 // The MTGA Format for cards is:
 // [Number of Copies] [Card Name] ([Expansion]) [CollectorNumber]
 package main
