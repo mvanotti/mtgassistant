@@ -1,0 +1,34 @@
+Deck
+4 Mystic Sanctuary (ELD) 247
+1 Castle Vantress (ELD) 242
+4 Living Twister (WAR) 203
+2 Forest (ELD) 266
+4 Stomping Ground (RNA) 259
+4 Narset, Parter of Veils (WAR) 61
+2 Island (ELD) 254
+1 Drawn from Dreams (M20) 56
+1 Mass Manipulation (RNA) 42
+1 Sundering Stroke (ELD) 144
+4 Arboreal Grazer (WAR) 149
+3 Root Snare (M19) 199
+1 Pulse of Murasa (M20) 189
+2 Planewide Celebration (WAR) 172
+1 Invert // Invent (GRN) 228
+2 Expansion // Explosion (GRN) 224
+1 Escape to the Wilds (ELD) 189
+4 Risen Reef (M20) 217
+3 Tamiyo, Collector of Tales (WAR) 220
+3 Flood of Tears (M20) 59
+4 Breeding Pool (RNA) 246
+4 Steam Vents (GRN) 257
+4 Fabled Passage (ELD) 244
+1 Mountain (ELD) 262
+
+Sideboard
+2 Agent of Treachery (M20) 43
+1 Mass Manipulation (RNA) 42
+3 Nissa, Who Shakes the World (WAR) 169
+2 Aether Gust (M20) 42
+3 Flame Sweep (M20) 139
+1 Chandra, Awakened Inferno (M20) 127
+3 Shifting Ceratops (M20) 194

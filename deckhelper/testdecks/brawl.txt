@@ -1,0 +1,57 @@
+Commander
+
+Deck
+1 Arcane Signet (ELD) 331
+1 Blast Zone (WAR) 244
+1 Breeding Pool (RNA) 246
+1 Castle Embereth (ELD) 239
+1 Castle Garenbrig (ELD) 240
+1 Castle Vantress (ELD) 242
+1 Cavalier of Flame (M20) 125
+1 Cavalier of Gales (M20) 52
+1 Cavalier of Thorns (M20) 167
+1 Chandra's Embercat (M20) 129
+1 Chandra's Triumph (WAR) 121
+1 Chandra, Acolyte of Flame (M20) 126
+1 Chandra, Awakened Inferno (M20) 127
+1 Chandra, Novice Pyromancer (M20) 128
+1 Chromatic Lantern (GRN) 233
+1 Cloudkin Seer (M20) 54
+1 Command Tower (ELD) 333
+1 Creeping Trailblazer (M20) 207
+1 Domri, Anarch of Bolas (WAR) 191
+1 Escape to the Wilds (ELD) 189
+1 Evolving Wilds (M20) 246
+1 Fabled Passage (ELD) 244
+1 Fires of Invention (ELD) 125
+1 Gruul Guildgate (RNA) 249
+1 Icon of Ancestry (M20) 229
+1 Leafkin Druid (M20) 178
+1 Living Twister (WAR) 203
+1 Mirror March (RNA) 108
+1 Mu Yanling, Sky Dancer (M20) 68
+1 Nissa, Who Shakes the World (WAR) 169
+1 Once Upon a Time (ELD) 169
+1 Overgrowth Elemental (M20) 187
+1 Pyroclastic Elemental (M20) 296
+1 Quasiduplicate (GRN) 51
+1 Repudiate // Replicate (RNA) 227
+1 Risen Reef (M20) 217
+1 Rugged Highlands (M20) 250
+1 Runaway Steam-Kin (GRN) 115
+1 Scampering Scorcher (M20) 158
+1 Shock (M20) 160
+1 Spark Double (WAR) 68
+1 Steam Vents (GRN) 257
+1 Stomping Ground (RNA) 259
+1 Swiftwater Cliffs (M20) 252
+1 Temple of Epiphany (M20) 253
+1 Temple of Mystery (M20) 255
+1 Thicket Crasher (M20) 196
+1 Thornwood Falls (M20) 258
+1 Thunderkin Awakener (M20) 162
+1 Wakeroot Elemental (M20) 202
+1 Wildfire Elemental (M20) 297
+2 Island (ANA) 57
+3 Forest (ANA) 60
+3 Mountain (ANA) 59

@@ -10,6 +10,7 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"regexp"
@@ -74,15 +75,10 @@ func isExpansionInStandard(str string) bool {
 	return stdExpansions[str]
 }
 
-func parseFile(path string) ([]card, error) {
-	f, err := os.Open(path)
-	if err != nil {
-		return nil, fmt.Errorf("failed to open file: %v", err)
-	}
-	defer f.Close()
+func parseDeck(r io.Reader) ([]card, error) {
 	cls := make([]card, 0)
 
-	scanner := bufio.NewScanner(f)
+	scanner := bufio.NewScanner(r)
 	lineNum := 0
 	for scanner.Scan() {
 		ln := strings.TrimSpace(scanner.Text())
@@ -171,7 +167,13 @@ func main() {
 		log.Fatalf("createLibrary failed: %v", err)
 	}
 
-	deck, err := parseFile(*deckPath)
+	deckFile, err := os.Open(*deckPath)
+	if err != nil {
+		log.Fatalf("failed to open deck file: %v", err)
+	}
+	defer deckFile.Close()
+
+	deck, err := parseDeck(deckFile)
 	if err != nil {
 		log.Fatalf("failed to parse deck file: %v", err)
 	}
