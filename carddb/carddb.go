@@ -41,6 +41,7 @@ type textJSON struct {
 }
 
 type langJSON struct {
+	IsoCode string     `json:"isoCode"`
 	LangKey string     `json:"langkey"`
 	Keys    []textJSON `json:"keys"`
 }
@@ -80,7 +81,7 @@ func (db *cardDB) ForEach(f func(Card)) {
 
 // NewLibrary creates a new database of magic cards. It needs to use the files that are used by MTG Arena
 // that describes the cards in JSON format. They are commonly named data_cards_<hash> and data_loc_<hash>
-// The language is the language of the card names that you would like (probably "EN").
+// The language is the iso-code for the language on the card names that you would like (probably "en-US").
 func NewLibrary(cardsFile io.Reader, textsFile io.Reader, textsLang string) (CardDB, error) {
 	cards, err := parseCardsFile(cardsFile)
 	if err != nil {
@@ -128,8 +129,8 @@ func parseTextsFile(textsFile io.Reader, lang string) (map[uint64]string, error)
 
 	m := make(map[uint64]string)
 	for _, v := range texts {
-		if v.LangKey != lang {
-			log.Printf("Skipping language %q", v.LangKey)
+		if v.IsoCode != lang {
+			log.Printf("Skipping language %q", v.IsoCode)
 			continue
 		}
 		for _, kv := range v.Keys {
@@ -198,6 +199,6 @@ func CreateLibrary(mtgDataPath string) (CardDB, error) {
 	}
 	defer textsFile.Close()
 
-	db, err := NewLibrary(cardsFile, textsFile, "EN")
+	db, err := NewLibrary(cardsFile, textsFile, "en-US")
 	return db, err
 }

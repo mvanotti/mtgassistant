@@ -31,7 +31,7 @@ func main() {
 	if len(cardLists) < 1 {
 		log.Fatal("no decks found in the mtg logs. make sure to enable logs in the Arena app.")
 	}
-	cardList := cardLists[0]
+	cardList := cardLists[len(cardLists)-1]
 
 	log.Println("Parsing MTG Data Files...")
 	db, err := carddb.CreateLibrary(*mtgDataPath)
