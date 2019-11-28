@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"strconv"
 	"strings"
 )
@@ -35,7 +34,6 @@ func FindCollection(mtgalogs io.Reader) ([]map[uint64]uint32, error) {
 		if !strings.HasPrefix(line, playerCollectionMessage) {
 			continue
 		}
-		log.Println("Found Player Cards Collection Message... Parsing")
 		// This line might contain the entire json payload, or just one part.
 		// Look for the first appearence of `{`
 		// Example: `[UnityCrossThreadLogger]<== PlayerInventory.GetPlayerCardsV3 {"id":232,...`
@@ -56,7 +54,6 @@ func FindCollection(mtgalogs io.Reader) ([]map[uint64]uint32, error) {
 			return nil, fmt.Errorf("failed to decode CardListMsg: %v", err)
 		}
 		cardsJSON := getPlayerCardsMsg.Payload
-		log.Printf("Found %d cards!", len(cardsJSON))
 		cards := make(map[uint64]uint32)
 		for txtID, count := range cardsJSON {
 			id, err := strconv.Atoi(txtID)
