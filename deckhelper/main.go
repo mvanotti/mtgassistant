@@ -18,6 +18,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/atotto/clipboard"
 	"github.com/mvanotti/mtgassistant/carddb"
 	"github.com/mvanotti/mtgassistant/collectionfinder"
 )
@@ -46,10 +47,11 @@ var cardRarity = map[uint64]string{
 }
 
 var (
-	mtgOutputLog = flag.String("log_file", `${USERPROFILE}\AppData\LocalLow\Wizards Of The Coast\MTGA\output_log.txt`, "Filepath of the MTG Arena Output Log, typically stored in an MTG folder inside C:\\Users")
-	deckPath     = flag.String("deck", "", "Path to the file containing your mtga deck.")
-	mtgDataPath  = flag.String("mtg_data", `C:\Program Files (x86)\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Data`, "Path to the Downloads\\Data folder inside the MTG Arena Install Directory")
-	enabledSets  = flag.String("sets", "STD", "Comma separated list of enabled sets. The string `STD` refers to all standard sets, and `ALL` to all sets (historic).")
+	mtgOutputLog  = flag.String("log_file", `${USERPROFILE}\AppData\LocalLow\Wizards Of The Coast\MTGA\output_log.txt`, "Filepath of the MTG Arena Output Log, typically stored in an MTG folder inside C:\\Users")
+	deckPath      = flag.String("deck", "", "Path to the file containing your mtga deck.")
+	mtgDataPath   = flag.String("mtg_data", `C:\Program Files (x86)\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Data`, "Path to the Downloads\\Data folder inside the MTG Arena Install Directory")
+	enabledSets   = flag.String("sets", "STD", "Comma separated list of enabled sets. The string `STD` refers to all standard sets, and `ALL` to all sets (historic).")
+	fromClipboard = flag.Bool("clipboard", false, "If set to true, will read the deck from the clipboard instead of a file.")
 )
 
 type card struct {
@@ -212,13 +214,23 @@ func main() {
 		log.Fatalf("failed to create deck helper: %v", err)
 	}
 
-	deckFile, err := os.Open(*deckPath)
-	if err != nil {
-		log.Fatalf("failed to open deck file: %v", err)
+	var deckReader io.Reader
+	if !*fromClipboard {
+		deckFile, err := os.Open(*deckPath)
+		if err != nil {
+			log.Fatalf("failed to open deck file: %v", err)
+		}
+		defer deckFile.Close()
+		deckReader = deckFile
+	} else {
+		clipboard, err := clipboard.ReadAll()
+		if err != nil {
+			log.Fatalf("failed to read clipboard: %v", err)
+		}
+		deckReader = strings.NewReader(clipboard)
 	}
-	defer deckFile.Close()
 
-	deck, err := parseDeck(deckFile)
+	deck, err := parseDeck(deckReader)
 	if err != nil {
 		log.Fatalf("failed to parse deck file: %v", err)
 	}
