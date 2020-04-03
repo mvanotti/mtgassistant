@@ -12,6 +12,21 @@ import (
 	"path/filepath"
 )
 
+const (
+	// MythicRarity is the rarity constant for Mythic cards
+	MythicRarity = 5
+	// RareRarity is the rarity constant for Rare cards
+	RareRarity = 4
+	// UncommonRarity is the rarity constant for Uncommon cards
+	UncommonRarity = 3
+	// CommonRarity is the rarity constant for Common cards
+	CommonRarity = 2
+	// BasicLandRarity is the rarity constant for Basic Lands
+	BasicLandRarity = 1
+	// TokenRarity is the rarity constant for for Token cards
+	TokenRarity = 0
+)
+
 type cardDB struct {
 	byName   map[string][]*Card
 	texts    map[uint64]string
@@ -63,6 +78,9 @@ type CardDB interface {
 
 	// ForEach runs f over each card in the database
 	ForEach(f func(Card))
+
+	// Returns all the cards that match the given predicate
+	Filter(predicate func(Card) bool) []Card
 }
 
 func (db *cardDB) GetCard(name string) []*Card {
@@ -71,6 +89,19 @@ func (db *cardDB) GetCard(name string) []*Card {
 
 func (db *cardDB) GetCardByID(id uint64) *Card {
 	return db.byID[id]
+}
+
+func (db *cardDB) Filter(predicate func(c Card) bool) []Card {
+	ls := []Card{}
+
+	for _, c := range db.cardList {
+		if !predicate(c) {
+			continue
+		}
+		ls = append(ls, c)
+	}
+
+	return ls
 }
 
 func (db *cardDB) ForEach(f func(Card)) {
