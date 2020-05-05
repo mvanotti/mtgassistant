@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MTG Arena Booster Tracker</title>
+</head>
+
+<body>
+<form action="upload" method="post" enctype="multipart/form-data">
+<label for="mtgalog">Upload MTG Logs</label>
+<p>They are typically located in: <b>${USERPROFILE}\AppData\LocalLow\Wizards Of The Coast\MTGA\output_log.txt</b></p>
+<input type="file" id="mtgalog" name="mtgalogs">
+<input type="submit" value="Submit">
+</form>
+</body>
+
+</html>
