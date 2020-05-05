@@ -145,8 +145,8 @@ func (helper deckHelper) deckDistance(deck []card) (map[uint64]uint32, error) {
 	return res, nil
 }
 
-var allSets = []string{"RNA", "PLS", "9ED", "NPH", "C13", "MOR", "WWK", "M11", "AVR", "CHK", "WTH", "LRW", "M10", "XLN", "SCG", "8ED", "SOK", "DIS", "RTR", "GTC", "ORI", "BFZ", "EMN", "M19", "MH1", "10E", "ME4", "RIX", "WAR", "MIR", "RAV", "ROE", "DAR", "G18", "GRN", "M20", "ELD", "DST", "5DN", "ME2", "AKH", "ANA", "INV", "CMD", "ZEN"}
-var stdSets = []string{"ELD", "M20", "WAR", "GRN", "RNA"}
+var allSets = []string{"SCG", "ALA", "VMA", "M19", "DIS", "THS", "ORI", "IKO", "ODY", "SOI", "EMN", "DAR", "PLS", "RAV", "ME2", "M11", "NPH", "ArenaSUP", "SHM", "ARB", "M15", "UND", "ROE", "CHK", "BFZ", "THB", "MIR", "DST", "ANA", "10E", "WWK", "M14", "RIX", "WTH", "M10", "ZEN", "AVR", "8ED", "LRW", "DDF", "SOM", "RTR", "DTK", "G18", "MRD", "5DN", "ISD", "M13", "RNA", "ONS", "JOU", "9ED", "ME4", "DKA", "GTC", "C13", "ELD", "MMQ", "MOR", "CMD", "MMA", "WAR", "M20", "INV", "SOK", "CONF", "AKH", "XLN", "GRN", "MH1"}
+var stdSets = []string{"THB", "ELD", "M20", "WAR", "GRN", "RNA"}
 
 func parseExpansions(enabledSets string) (map[string]bool, error) {
 	var enabledExpansions = make(map[string]bool)
