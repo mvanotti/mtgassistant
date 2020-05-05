@@ -1,4 +1,5 @@
-// program collectionexporter parses a "Magic The Gathering - Arena" output log and prints out the card collectioon of the user.
+// program limitedcollection helps users arrange limited tournaments by allowing them to easily export their booster results.
+// This program works by parsing the "Magic The Gathering - Arena" to capture the user's Collection and Inventory.
 package main
 
 import (
@@ -14,7 +15,8 @@ import (
 var (
 	mtgOutputLog = flag.String("log_file", `${USERPROFILE}\AppData\LocalLow\Wizards Of The Coast\MTGA\output_log.txt`, "Filepath of the MTG Arena Output Log, typically stored in an MTG folder inside C:\\Users")
 	mtgDataPath  = flag.String("mtg_data", `C:\Program Files (x86)\Wizards of the Coast\MTGA\MTGA_Data\Downloads\Data`, "Path to the Downloads\\Data folder inside the MTG Arena Install Directory")
-	inventory    = flag.Bool("inventory", false, "Also output user inventory")
+	diffStart    = flag.Int("diff_start", 0, "Starting diff point")
+	diffEnd      = flag.Int("diff_end", 1, "Last diff message")
 )
 
 func main() {
@@ -25,14 +27,10 @@ func main() {
 		log.Fatalf("failed to open log file: %v", err)
 	}
 	defer f.Close()
-	cardLists, err := collectionfinder.FindCollection(f)
+	boosterData, err := collectionfinder.FindBoosters(f)
 	if err != nil {
 		log.Fatalf("failed to parse mtga logs: %v", err)
 	}
-	if len(cardLists) < 1 {
-		log.Fatal("no decks found in the mtg logs. make sure to enable logs in the Arena app.")
-	}
-	cardList := cardLists[len(cardLists)-1]
 
 	log.Println("Parsing MTG Data Files...")
 	db, err := carddb.CreateLibrary(*mtgDataPath)
@@ -40,20 +38,15 @@ func main() {
 		log.Fatalf("createLibrary failed: %v", err)
 	}
 
-	for id, count := range cardList {
-		card := db.GetCardByID(id)
-		fmt.Printf("%d %s (%s) %s\n", count, card.Name, card.Set, card.CollectorNumber)
-	}
+	for i, booster := range boosterData {
+		fmt.Printf("Booster #%d\n", i)
 
-	if *inventory {
-		f.Seek(0, 0) // Rewind file.
-		inventories, err := collectionfinder.FindInventory(f)
-		if err != nil {
-			log.Fatalf("failed to parse mtga logs: %v", err)
+		for _, id := range booster.CardIds {
+			card := db.GetCardByID(id)
+			fmt.Printf("%d %s (%s) %s\n", 1, card.Name, card.Set, card.CollectorNumber)
 		}
-		if len(inventories) == 0 {
-			log.Fatalf("No inventory found")
-		}
-		fmt.Printf("%+v\n", inventories[0])
+
+		fmt.Printf("\nCommon Wildcards: %d\nUncommon Wildcards: %d\nRare Wildcards: %d\nMythic Wildcards: %d\n",
+			booster.CommonWildcards, booster.UncommonWildcards, booster.RareWildcards, booster.MythicWildcards)
 	}
 }
