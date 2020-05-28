@@ -12,7 +12,7 @@ import (
 
 const playerCollectionMessage string = "[UnityCrossThreadLogger]<== PlayerInventory.GetPlayerCardsV3"
 const playerInventoryMessage string = "[UnityCrossThreadLogger]<== PlayerInventory.GetPlayerInventory"
-const playerInventoryUpdatedMessage string = "[UnityCrossThreadLogger]==> Inventory.Updated"
+const playerInventoryUpdatedMessage string = "[UnityCrossThreadLogger]<== Inventory.Updated"
 
 // PlayerInventory represents the inventory of a player.
 type PlayerInventory struct {
